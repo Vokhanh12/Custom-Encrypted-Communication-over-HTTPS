@@ -1,1 +1,7 @@
 # Custom-Encrypted-Communication-over-HTTPS
+
+
+```bash
+openssl genpkey -algorithm RSA -out private.pem -pkeyopt rsa_keygen_bits:2048
+openssl rsa -pubout -in private.pem -out public.pem
+```
