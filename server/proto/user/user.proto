@@ -1,13 +1,18 @@
 syntax = "proto3";
 
 package user;
-option go_package = "your_project/api/userpb;userpb";
 
-import "user/user_message.proto";
-import "common/error.proto";
+option go_package = "server/api/user;user";
 
 service UserService {
-  rpc Handshake(HandshakeRequest) returns (HandshakeResponse);
   rpc Login(LoginRequest) returns (LoginResponse);
-  rpc GetProfile(GetProfileRequest) returns (GetProfileResponse);
+}
+
+message LoginRequest {
+  string email = 1;
+  string password = 2;
+}
+
+message LoginResponse {
+  string token = 1;
 }

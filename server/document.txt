@@ -1,0 +1,8 @@
+// Test GRPC
+grpcurl -plaintext localhost:50051 list                                                   ⬡ 18.20.8 [±master ●●]
+grpcurl -plaintext -d '{"email":"test@example.com","password":"123456"}' localhost:50051 user.UserService/Login
+
+// Wire 
+echo 'export PATH=$PATH:$HOME/go/bin' >> ~/.zshrc
+source ~/.zshrc
+
