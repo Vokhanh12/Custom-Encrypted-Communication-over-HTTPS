@@ -6,3 +6,5 @@ grpcurl -plaintext -d '{"email":"test@example.com","password":"123456"}' localho
 echo 'export PATH=$PATH:$HOME/go/bin' >> ~/.zshrc
 source ~/.zshrc
 
+// Tree folder
+Tổng Quan Flow (gRPC → DTO → UseCase → Command → Handler → Entity)

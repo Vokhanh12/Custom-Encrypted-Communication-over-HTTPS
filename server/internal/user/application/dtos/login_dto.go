@@ -1,4 +1,4 @@
-package application
+package dtos
 
 type LoginRequestDTO struct {
 	Email    string
