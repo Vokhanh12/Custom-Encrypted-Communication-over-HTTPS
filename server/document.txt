@@ -8,3 +8,5 @@ source ~/.zshrc
 
 // Tree folder
 Tổng Quan Flow (gRPC → DTO → UseCase → Command → Handler → Entity)
+
+grpc → dto → mapper → command → handler → response dto → grpc

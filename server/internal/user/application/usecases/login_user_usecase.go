@@ -18,3 +18,9 @@ func (u *LoginUserUsecase) Login(ctx context.Context, dto ds.LoginRequestDTO) (*
 
 	return u.Handler.Handle(ctx, cmd)
 }
+
+func NewLoginUserUsecase(handler *commands.LoginUserHandler) *LoginUserUsecase {
+	return &LoginUserUsecase{
+		Handler: handler,
+	}
+}
