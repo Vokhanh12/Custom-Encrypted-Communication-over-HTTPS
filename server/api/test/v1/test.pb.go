@@ -2,9 +2,9 @@
 // versions:
 // 	protoc-gen-go v1.36.6
 // 	protoc        v5.29.3
-// source: test/test.proto
+// source: test/v1/test.proto
 
-package test
+package testv1
 
 import (
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
@@ -30,7 +30,7 @@ type TestRequest struct {
 
 func (x *TestRequest) Reset() {
 	*x = TestRequest{}
-	mi := &file_test_test_proto_msgTypes[0]
+	mi := &file_test_v1_test_proto_msgTypes[0]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -42,7 +42,7 @@ func (x *TestRequest) String() string {
 func (*TestRequest) ProtoMessage() {}
 
 func (x *TestRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_test_test_proto_msgTypes[0]
+	mi := &file_test_v1_test_proto_msgTypes[0]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -55,7 +55,7 @@ func (x *TestRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use TestRequest.ProtoReflect.Descriptor instead.
 func (*TestRequest) Descriptor() ([]byte, []int) {
-	return file_test_test_proto_rawDescGZIP(), []int{0}
+	return file_test_v1_test_proto_rawDescGZIP(), []int{0}
 }
 
 func (x *TestRequest) GetTest() string {
@@ -73,7 +73,7 @@ type TestResponse struct {
 
 func (x *TestResponse) Reset() {
 	*x = TestResponse{}
-	mi := &file_test_test_proto_msgTypes[1]
+	mi := &file_test_v1_test_proto_msgTypes[1]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -85,7 +85,7 @@ func (x *TestResponse) String() string {
 func (*TestResponse) ProtoMessage() {}
 
 func (x *TestResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_test_test_proto_msgTypes[1]
+	mi := &file_test_v1_test_proto_msgTypes[1]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -98,38 +98,38 @@ func (x *TestResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use TestResponse.ProtoReflect.Descriptor instead.
 func (*TestResponse) Descriptor() ([]byte, []int) {
-	return file_test_test_proto_rawDescGZIP(), []int{1}
+	return file_test_v1_test_proto_rawDescGZIP(), []int{1}
 }
 
-var File_test_test_proto protoreflect.FileDescriptor
+var File_test_v1_test_proto protoreflect.FileDescriptor
 
-const file_test_test_proto_rawDesc = "" +
+const file_test_v1_test_proto_rawDesc = "" +
 	"\n" +
-	"\x0ftest/test.proto\x12\x04test\"!\n" +
+	"\x12test/v1/test.proto\x12\x04test\"!\n" +
 	"\vTestRequest\x12\x12\n" +
 	"\x04test\x18\x01 \x01(\tR\x04test\"\x0e\n" +
 	"\fTestResponse2<\n" +
 	"\vTestService\x12-\n" +
-	"\x04Test\x12\x11.test.TestRequest\x1a\x12.test.TestResponseB\x16Z\x14server/api/test;testb\x06proto3"
+	"\x04Test\x12\x11.test.TestRequest\x1a\x12.test.TestResponseB\x14Z\x12api/test/v1;testv1b\x06proto3"
 
 var (
-	file_test_test_proto_rawDescOnce sync.Once
-	file_test_test_proto_rawDescData []byte
+	file_test_v1_test_proto_rawDescOnce sync.Once
+	file_test_v1_test_proto_rawDescData []byte
 )
 
-func file_test_test_proto_rawDescGZIP() []byte {
-	file_test_test_proto_rawDescOnce.Do(func() {
-		file_test_test_proto_rawDescData = protoimpl.X.CompressGZIP(unsafe.Slice(unsafe.StringData(file_test_test_proto_rawDesc), len(file_test_test_proto_rawDesc)))
+func file_test_v1_test_proto_rawDescGZIP() []byte {
+	file_test_v1_test_proto_rawDescOnce.Do(func() {
+		file_test_v1_test_proto_rawDescData = protoimpl.X.CompressGZIP(unsafe.Slice(unsafe.StringData(file_test_v1_test_proto_rawDesc), len(file_test_v1_test_proto_rawDesc)))
 	})
-	return file_test_test_proto_rawDescData
+	return file_test_v1_test_proto_rawDescData
 }
 
-var file_test_test_proto_msgTypes = make([]protoimpl.MessageInfo, 2)
-var file_test_test_proto_goTypes = []any{
+var file_test_v1_test_proto_msgTypes = make([]protoimpl.MessageInfo, 2)
+var file_test_v1_test_proto_goTypes = []any{
 	(*TestRequest)(nil),  // 0: test.TestRequest
 	(*TestResponse)(nil), // 1: test.TestResponse
 }
-var file_test_test_proto_depIdxs = []int32{
+var file_test_v1_test_proto_depIdxs = []int32{
 	0, // 0: test.TestService.Test:input_type -> test.TestRequest
 	1, // 1: test.TestService.Test:output_type -> test.TestResponse
 	1, // [1:2] is the sub-list for method output_type
@@ -139,26 +139,26 @@ var file_test_test_proto_depIdxs = []int32{
 	0, // [0:0] is the sub-list for field type_name
 }
 
-func init() { file_test_test_proto_init() }
-func file_test_test_proto_init() {
-	if File_test_test_proto != nil {
+func init() { file_test_v1_test_proto_init() }
+func file_test_v1_test_proto_init() {
+	if File_test_v1_test_proto != nil {
 		return
 	}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
-			RawDescriptor: unsafe.Slice(unsafe.StringData(file_test_test_proto_rawDesc), len(file_test_test_proto_rawDesc)),
+			RawDescriptor: unsafe.Slice(unsafe.StringData(file_test_v1_test_proto_rawDesc), len(file_test_v1_test_proto_rawDesc)),
 			NumEnums:      0,
 			NumMessages:   2,
 			NumExtensions: 0,
 			NumServices:   1,
 		},
-		GoTypes:           file_test_test_proto_goTypes,
-		DependencyIndexes: file_test_test_proto_depIdxs,
-		MessageInfos:      file_test_test_proto_msgTypes,
+		GoTypes:           file_test_v1_test_proto_goTypes,
+		DependencyIndexes: file_test_v1_test_proto_depIdxs,
+		MessageInfos:      file_test_v1_test_proto_msgTypes,
 	}.Build()
-	File_test_test_proto = out.File
-	file_test_test_proto_goTypes = nil
-	file_test_test_proto_depIdxs = nil
+	File_test_v1_test_proto = out.File
+	file_test_v1_test_proto_goTypes = nil
+	file_test_v1_test_proto_depIdxs = nil
 }

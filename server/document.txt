@@ -10,3 +10,18 @@ source ~/.zshrc
 Tổng Quan Flow (gRPC → DTO → UseCase → Command → Handler → Entity)
 
 grpc → dto → mapper → command → handler → response dto → grpc
+
+// gen descriptor.pb
+protoc \
+  -I./proto \
+  -I./third_party/googleapis \
+  --include_imports \
+  --include_source_info \
+  --descriptor_set_out=envoy/all_services_descriptor.pb \
+  $(find ./proto -name "*.proto")
+
+// check descriptor
+grpcurl -plaintext -import-path ./proto -proto ./proto/user/v1/user.proto list
+grpcurl -plaintext -protoset envoy/all_services_descriptor.pb list
+
+

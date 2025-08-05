@@ -3,7 +3,7 @@ package grpc
 import (
 	"context"
 
-	pb "myapp/api/user"
+	pb "myapp/api/user/v1"
 	"myapp/internal/user/application/commands"
 	"myapp/internal/user/application/dtos"
 	"myapp/internal/user/application/mappers"

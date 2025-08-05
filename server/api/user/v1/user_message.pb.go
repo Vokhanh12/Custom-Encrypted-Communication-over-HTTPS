@@ -2,9 +2,9 @@
 // versions:
 // 	protoc-gen-go v1.36.6
 // 	protoc        v5.29.3
-// source: user/user_message.proto
+// source: user/v1/user_message.proto
 
-package user
+package userv1
 
 import (
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
@@ -20,14 +20,14 @@ const (
 	_ = protoimpl.EnforceVersion(protoimpl.MaxVersion - 20)
 )
 
-var File_user_user_message_proto protoreflect.FileDescriptor
+var File_user_v1_user_message_proto protoreflect.FileDescriptor
 
-const file_user_user_message_proto_rawDesc = "" +
+const file_user_v1_user_message_proto_rawDesc = "" +
 	"\n" +
-	"\x17user/user_message.proto\x12\x04userB\x16Z\x14server/api/user;userb\x06proto3"
+	"\x1auser/v1/user_message.proto\x12\auser.v1B\x14Z\x12api/user/v1;userv1b\x06proto3"
 
-var file_user_user_message_proto_goTypes = []any{}
-var file_user_user_message_proto_depIdxs = []int32{
+var file_user_v1_user_message_proto_goTypes = []any{}
+var file_user_v1_user_message_proto_depIdxs = []int32{
 	0, // [0:0] is the sub-list for method output_type
 	0, // [0:0] is the sub-list for method input_type
 	0, // [0:0] is the sub-list for extension type_name
@@ -35,25 +35,25 @@ var file_user_user_message_proto_depIdxs = []int32{
 	0, // [0:0] is the sub-list for field type_name
 }
 
-func init() { file_user_user_message_proto_init() }
-func file_user_user_message_proto_init() {
-	if File_user_user_message_proto != nil {
+func init() { file_user_v1_user_message_proto_init() }
+func file_user_v1_user_message_proto_init() {
+	if File_user_v1_user_message_proto != nil {
 		return
 	}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
-			RawDescriptor: unsafe.Slice(unsafe.StringData(file_user_user_message_proto_rawDesc), len(file_user_user_message_proto_rawDesc)),
+			RawDescriptor: unsafe.Slice(unsafe.StringData(file_user_v1_user_message_proto_rawDesc), len(file_user_v1_user_message_proto_rawDesc)),
 			NumEnums:      0,
 			NumMessages:   0,
 			NumExtensions: 0,
 			NumServices:   0,
 		},
-		GoTypes:           file_user_user_message_proto_goTypes,
-		DependencyIndexes: file_user_user_message_proto_depIdxs,
+		GoTypes:           file_user_v1_user_message_proto_goTypes,
+		DependencyIndexes: file_user_v1_user_message_proto_depIdxs,
 	}.Build()
-	File_user_user_message_proto = out.File
-	file_user_user_message_proto_goTypes = nil
-	file_user_user_message_proto_depIdxs = nil
+	File_user_v1_user_message_proto = out.File
+	file_user_v1_user_message_proto_goTypes = nil
+	file_user_v1_user_message_proto_depIdxs = nil
 }

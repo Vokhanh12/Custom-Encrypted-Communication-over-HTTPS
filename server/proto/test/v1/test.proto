@@ -2,7 +2,7 @@ syntax = "proto3";
 
 package test;
 
-option go_package = "server/api/test;test";
+option go_package = "api/test/v1;testv1";
 
 service TestService {
   rpc Test(TestRequest) returns (TestResponse);

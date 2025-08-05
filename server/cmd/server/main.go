@@ -7,7 +7,7 @@ import (
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/reflection"
 
-	api_user "myapp/api/user"
+	userpb "myapp/api/user/v1"
 	user_di "myapp/internal/user"
 )
 
@@ -21,7 +21,7 @@ func main() {
 	reflection.Register(s)
 
 	userService := user_di.InitializeUserHandlers()
-	api_user.RegisterUserServiceServer(s, userService)
+	userpb.RegisterUserServiceServer(s, userService)
 
 	log.Println("gRPC server started on :50051")
 	if err := s.Serve(lis); err != nil {
