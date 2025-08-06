@@ -3,24 +3,28 @@ package usecases
 import (
 	"context"
 	"myapp/internal/user/application/commands"
-	ds "myapp/internal/user/application/dtos"
+	"myapp/internal/user/domain"
 )
 
 type LoginUserUsecase struct {
-	Handler *commands.LoginUserHandler
+	UserRepo domain.UserRepository
 }
 
-func (u *LoginUserUsecase) Login(ctx context.Context, dto ds.LoginRequestDTO) (*ds.LoginResponseDTO, error) {
-	cmd := commands.LoginUserCommand{
-		Email:    dto.Email,
-		Password: dto.Password,
-	}
-
-	return u.Handler.Handle(ctx, cmd)
-}
-
-func NewLoginUserUsecase(handler *commands.LoginUserHandler) *LoginUserUsecase {
+func NewLoginUserUsecase(repo domain.UserRepository) *LoginUserUsecase {
 	return &LoginUserUsecase{
-		Handler: handler,
+		UserRepo: repo,
 	}
+}
+
+func (u *LoginUserUsecase) Execute(ctx context.Context, cmd commands.LoginCommand) (*commands.LoginResult, error) {
+
+	_, err := u.UserRepo.FindByEmail(ctx, cmd.Email)
+	if err != nil {
+		return nil, err
+	}
+
+	return &commands.LoginResult{
+		AccessToken:  "accessToken",
+		RefreshToken: "refreshToken",
+	}, nil
 }

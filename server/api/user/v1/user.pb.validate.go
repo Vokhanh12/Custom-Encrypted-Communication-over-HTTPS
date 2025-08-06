@@ -160,7 +160,9 @@ func (m *LoginResponse) validate(all bool) error {
 
 	var errors []error
 
-	// no validation rules for Token
+	// no validation rules for AccessToken
+
+	// no validation rules for RefreshToken
 
 	if len(errors) > 0 {
 		return LoginResponseMultiError(errors)
@@ -239,3 +241,213 @@ var _ interface {
 	Cause() error
 	ErrorName() string
 } = LoginResponseValidationError{}
+
+// Validate checks the field values on HandshakeRequest with the rules defined
+// in the proto definition for this message. If any rules are violated, the
+// first error encountered is returned, or nil if there are no violations.
+func (m *HandshakeRequest) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on HandshakeRequest with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// HandshakeRequestMultiError, or nil if none found.
+func (m *HandshakeRequest) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *HandshakeRequest) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for ClientPublicKey
+
+	if len(errors) > 0 {
+		return HandshakeRequestMultiError(errors)
+	}
+
+	return nil
+}
+
+// HandshakeRequestMultiError is an error wrapping multiple validation errors
+// returned by HandshakeRequest.ValidateAll() if the designated constraints
+// aren't met.
+type HandshakeRequestMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m HandshakeRequestMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m HandshakeRequestMultiError) AllErrors() []error { return m }
+
+// HandshakeRequestValidationError is the validation error returned by
+// HandshakeRequest.Validate if the designated constraints aren't met.
+type HandshakeRequestValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e HandshakeRequestValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e HandshakeRequestValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e HandshakeRequestValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e HandshakeRequestValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e HandshakeRequestValidationError) ErrorName() string { return "HandshakeRequestValidationError" }
+
+// Error satisfies the builtin error interface
+func (e HandshakeRequestValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sHandshakeRequest.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = HandshakeRequestValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = HandshakeRequestValidationError{}
+
+// Validate checks the field values on HandshakeResponse with the rules defined
+// in the proto definition for this message. If any rules are violated, the
+// first error encountered is returned, or nil if there are no violations.
+func (m *HandshakeResponse) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on HandshakeResponse with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// HandshakeResponseMultiError, or nil if none found.
+func (m *HandshakeResponse) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *HandshakeResponse) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for ServerPublicKey
+
+	// no validation rules for EncryptedSessionData
+
+	// no validation rules for SessionId
+
+	if len(errors) > 0 {
+		return HandshakeResponseMultiError(errors)
+	}
+
+	return nil
+}
+
+// HandshakeResponseMultiError is an error wrapping multiple validation errors
+// returned by HandshakeResponse.ValidateAll() if the designated constraints
+// aren't met.
+type HandshakeResponseMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m HandshakeResponseMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m HandshakeResponseMultiError) AllErrors() []error { return m }
+
+// HandshakeResponseValidationError is the validation error returned by
+// HandshakeResponse.Validate if the designated constraints aren't met.
+type HandshakeResponseValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e HandshakeResponseValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e HandshakeResponseValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e HandshakeResponseValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e HandshakeResponseValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e HandshakeResponseValidationError) ErrorName() string {
+	return "HandshakeResponseValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e HandshakeResponseValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sHandshakeResponse.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = HandshakeResponseValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = HandshakeResponseValidationError{}

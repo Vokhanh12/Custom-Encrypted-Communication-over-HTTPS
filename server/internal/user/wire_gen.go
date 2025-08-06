@@ -7,16 +7,16 @@
 package user
 
 import (
-	"myapp/internal/user/application/commands"
+	"myapp/internal/user/application/usecases"
 	"myapp/internal/user/infrastructure/repositories"
 	"myapp/internal/user/interface/grpc"
 )
 
 // Injectors from wire.go:
 
-func InitializeUserHandlers() *grpc.UserHandler {
-	gormUserRepository := repositories.NewGormUserRepository()
-	loginUserHandler := commands.NewLoginUserHandler(gormUserRepository)
-	userHandler := grpc.NewUserHandler(loginUserHandler)
-	return userHandler
+func InitializeUserHandler() (*grpc.UserHandler, error) {
+	userRepository := repositories.NewGormRepository()
+	loginUserUsecase := usecases.NewLoginUserUsecase(userRepository)
+	userHandler := grpc.NewUserHandler(loginUserUsecase)
+	return userHandler, nil
 }

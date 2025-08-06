@@ -1,24 +1,21 @@
 //go:build wireinject
+// +build wireinject
 
 package user
 
 import (
-	"myapp/internal/user/application/commands"
-	"myapp/internal/user/domain"
+	"myapp/internal/user/application/usecases"
 	"myapp/internal/user/infrastructure/repositories"
 	"myapp/internal/user/interface/grpc"
 
 	"github.com/google/wire"
 )
 
-func InitializeUserHandlers() *grpc.UserHandler {
+func InitializeUserHandler() (*grpc.UserHandler, error) {
 	wire.Build(
-		repositories.NewGormUserRepository,
-		wire.Bind(new(domain.UserRepository), new(*repositories.GormUserRepository)),
-
-		commands.NewLoginUserHandler,
-
+		repositories.NewGormRepository,
+		usecases.NewLoginUserUsecase,
 		grpc.NewUserHandler,
 	)
-	return nil
+	return &grpc.UserHandler{}, nil
 }

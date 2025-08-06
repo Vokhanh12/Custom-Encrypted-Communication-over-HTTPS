@@ -20,7 +20,8 @@ func main() {
 	s := grpc.NewServer()
 	reflection.Register(s)
 
-	userService := user_di.InitializeUserHandlers()
+	userService, err := user_di.InitializeUserHandler()
+
 	userpb.RegisterUserServiceServer(s, userService)
 
 	log.Println("gRPC server started on :50051")

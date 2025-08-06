@@ -3,13 +3,19 @@ syntax = "proto3";
 package user.v1;
 option go_package = "api/user/v1;userv1"; 
 
-import "proto/google/api/annotations.proto";
-
+import "google/api/annotations.proto";
 
 service UserService {
   rpc Login(LoginRequest) returns (LoginResponse) {
     option (google.api.http) = {
       post: "/v1/login"
+      body: "*"
+    };
+  }
+
+  rpc Handshake(HandshakeRequest) returns (HandshakeResponse) {
+    option (google.api.http) = {
+      post: "/v1/handshake"
       body: "*"
     };
   }
@@ -21,5 +27,16 @@ message LoginRequest {
 }
 
 message LoginResponse {
-  string token = 1;
+  string access_token = 1;
+  string refresh_token = 2;
+}
+
+message HandshakeRequest {
+  string client_public_key = 1; 
+}
+
+message HandshakeResponse {
+  string server_public_key = 1;
+  string encrypted_session_data = 2;
+  string session_id = 3;
 }

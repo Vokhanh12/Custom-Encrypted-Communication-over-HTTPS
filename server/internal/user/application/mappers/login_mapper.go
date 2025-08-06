@@ -5,9 +5,16 @@ import (
 	"myapp/internal/user/application/dtos"
 )
 
-func MapLoginDTOToCommand(dto dtos.LoginRequestDTO) commands.LoginUserCommand {
-	return commands.LoginUserCommand{
+func MapLoginRequestToCommand(dto dtos.LoginRequestDTO) commands.LoginCommand {
+	return commands.LoginCommand{
 		Email:    dto.Email,
 		Password: dto.Password,
+	}
+}
+
+func MapLoginResultToResponseDTO(result *commands.LoginResult) dtos.LoginResponseDTO {
+	return dtos.LoginResponseDTO{
+		AccessToken:  result.AccessToken,
+		RefreshToken: result.RefreshToken,
 	}
 }

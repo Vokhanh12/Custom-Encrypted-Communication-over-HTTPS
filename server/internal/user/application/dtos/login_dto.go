@@ -6,5 +6,6 @@ type LoginRequestDTO struct {
 }
 
 type LoginResponseDTO struct {
-	Token string
+	AccessToken  string
+	RefreshToken string
 }

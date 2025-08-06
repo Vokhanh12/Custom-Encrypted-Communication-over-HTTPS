@@ -3,77 +3,50 @@ package grpc
 import (
 	"context"
 
-	pb "myapp/api/user/v1"
-	"myapp/internal/user/application/commands"
+	userv1 "myapp/api/user/v1"
 	"myapp/internal/user/application/dtos"
 	"myapp/internal/user/application/mappers"
-	"myapp/internal/user/application/queries"
+	"myapp/internal/user/application/usecases"
 
 	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/status"
 )
 
 type UserHandler struct {
-	pb.UnimplementedUserServiceServer
-
-	// RegisterHandler       *commands.RegisterUserHandler
-	LoginHandler          *commands.LoginUserHandler
-	GetUserByEmailHandler *queries.GetUserByEmailHandler
+	userv1.UnimplementedUserServiceServer
+	loginUsecase *usecases.LoginUserUsecase
 }
 
-func NewUserHandler(
-	// register *commands.RegisterUserHandler,
-	login *commands.LoginUserHandler,
-	//getUserByEmail *queries.GetUserByEmailHandler,
-) *UserHandler {
-	return &UserHandler{
-		//	RegisterHandler:       register,
-		LoginHandler: login,
-		//	GetUserByEmailHandler: getUserByEmail,
-	}
+// Handshake implements userv1.UserServiceServer.
+func (h *UserHandler) Handshake(context.Context, *userv1.HandshakeRequest) (*userv1.HandshakeResponse, error) {
+	panic("unimplemented")
 }
 
-// func (h *UserHandler) Register(ctx context.Context, req *pb.RegisterRequest) (*pb.RegisterResponse, error) {
-// 	dtoReq := dto.RegisterRequestDTO{
-// 		Email:    req.GetEmail(),
-// 		Password: req.GetPassword(),
-// 	}
+// mustEmbedUnimplementedUserServiceServer implements userv1.UserServiceServer.
+func (h *UserHandler) mustEmbedUnimplementedUserServiceServer() {
+	panic("unimplemented")
+}
 
-// 	err := h.RegisterHandler.Handle(ctx, dtoReq)
-// 	if err != nil {
-// 		return nil, status.Error(codes.Internal, err.Error())
-// 	}
+func NewUserHandler(loginUsecase *usecases.LoginUserUsecase) *UserHandler {
+	return &UserHandler{loginUsecase: loginUsecase}
+}
 
-// 	return &pb.RegisterResponse{Success: true}, nil
-// }
-
-func (h *UserHandler) Login(ctx context.Context, req *pb.LoginRequest) (*pb.LoginResponse, error) {
-	dtoReq := dtos.LoginRequestDTO{
+func (h *UserHandler) Login(ctx context.Context, req *userv1.LoginRequest) (*userv1.LoginResponse, error) {
+	dto := dtos.LoginRequestDTO{
 		Email:    req.GetEmail(),
 		Password: req.GetPassword(),
 	}
 
-	dtoRes, err := h.LoginHandler.Handle(ctx, mappers.MapLoginDTOToCommand(dtoReq))
+	cmd := mappers.MapLoginRequestToCommand(dto)
+
+	result, err := h.loginUsecase.Execute(ctx, cmd)
 	if err != nil {
 		return nil, status.Error(codes.Unauthenticated, err.Error())
 	}
 
-	return &pb.LoginResponse{Token: dtoRes.Token}, nil
+	resDTO := mappers.MapLoginResultToResponseDTO(result)
+	return &userv1.LoginResponse{
+		AccessToken:  resDTO.AccessToken,
+		RefreshToken: resDTO.RefreshToken,
+	}, nil
 }
-
-// func (h *UserHandler) GetUserByEmail(ctx context.Context, req *pb.GetUserByEmailRequest) (*pb.GetUserByEmailResponse, error) {
-// 	query := dto.GetUserByEmailQueryDTO{
-// 		Email: req.GetEmail(),
-// 	}
-
-// 	userDTO, err := h.GetUserByEmailHandler.Handle(ctx, query)
-// 	if err != nil {
-// 		return nil, status.Error(codes.NotFound, err.Error())
-// 	}
-
-// 	return &pb.GetUserByEmailResponse{
-// 		Id:    userDTO.ID,
-// 		Email: userDTO.Email,
-// 		Name:  userDTO.Name,
-// 	}, nil
-// }

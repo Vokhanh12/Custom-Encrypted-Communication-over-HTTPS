@@ -1,23 +1,26 @@
+// infrastructure/repositories/gorm_repository.go
 package repositories
 
 import (
 	"context"
+
 	"myapp/internal/user/domain"
 )
 
-type GormUserRepository struct{}
-
-func NewGormUserRepository() *GormUserRepository {
-	return &GormUserRepository{}
+type GormRepository struct {
 }
 
-func (r *GormUserRepository) FindByEmail(ctx context.Context, email string) (*domain.User, error) {
-	if email == "test@example.com" {
-		return &domain.User{
-			ID:       "1",
-			Email:    email,
-			Password: domain.HashPassword("123456"),
-		}, nil
-	}
-	return nil, nil
+func NewGormRepository() domain.UserRepository {
+	return &GormRepository{}
+}
+
+func (r *GormRepository) FindByEmail(ctx context.Context, email string) (*domain.User, error) {
+	// var user domain.User
+	// err := r.db.WithContext(ctx).Where("email = ?", email).First(&user).Error
+	// if err != nil {
+	// 	return nil, err
+	// }
+	return &domain.User{
+		ID: "ID", Email: "EMAIL", Password: "PASSWORD",
+	}, nil
 }
