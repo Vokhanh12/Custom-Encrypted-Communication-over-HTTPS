@@ -24,4 +24,31 @@ protoc \
 grpcurl -plaintext -import-path ./proto -proto ./proto/user/v1/user.proto list
 grpcurl -plaintext -protoset envoy/all_services_descriptor.pb list
 
+// generate key client
+func main() {
+	// 🔐 Tạo đường cong elliptic P-521
+	curve := ecdh.P521()
 
+	// 🔑 Tạo khóa riêng client
+	clientPriv, err := curve.GenerateKey(rand.Reader)
+	if err != nil {
+		log.Fatalf("Lỗi tạo khóa riêng: %v", err)
+	}
+
+	// 🔓 Lấy khóa công khai từ khóa riêng
+	clientPub := clientPriv.PublicKey()
+
+	// 📦 Encode khóa công khai thành Base64 để dễ truyền hoặc lưu trữ
+	pubKeyBytes := clientPub.Bytes()
+	pubKeyBase64 := base64.StdEncoding.EncodeToString(pubKeyBytes)
+
+	fmt.Println("📤 Client Public Key (Base64):")
+	fmt.Println(pubKeyBase64)
+
+	// 📦 Encode khóa riêng nếu cần (không nên truyền ra ngoài nếu không cần thiết)
+	privKeyBytes := clientPriv.Bytes()
+	privKeyBase64 := base64.StdEncoding.EncodeToString(privKeyBytes)
+
+	fmt.Println("🔐 Client Private Key (Base64):")
+	fmt.Println(privKeyBase64)
+}

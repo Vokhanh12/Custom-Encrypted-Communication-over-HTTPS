@@ -15,6 +15,7 @@ func InitializeUserHandler() (*grpc.UserHandler, error) {
 	wire.Build(
 		repositories.NewGormRepository,
 		usecases.NewLoginUserUsecase,
+		usecases.NewHandshakeUsecase,
 		grpc.NewUserHandler,
 	)
 	return &grpc.UserHandler{}, nil

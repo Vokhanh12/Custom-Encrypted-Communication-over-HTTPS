@@ -17,6 +17,7 @@ import (
 func InitializeUserHandler() (*grpc.UserHandler, error) {
 	userRepository := repositories.NewGormRepository()
 	loginUserUsecase := usecases.NewLoginUserUsecase(userRepository)
-	userHandler := grpc.NewUserHandler(loginUserUsecase)
+	handshakeUsecase := usecases.NewHandshakeUsecase(userRepository)
+	userHandler := grpc.NewUserHandler(loginUserUsecase, handshakeUsecase)
 	return userHandler, nil
 }
